@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Dashboard - Digital ID Wallet</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 40px;
+    }
+    .doc-card {
+      border: 1px solid #ddd;
+      padding: 15px;
+      margin-bottom: 20px;
+      border-radius: 10px;
+      background: #f9f9f9;
+      max-width: 600px;
+    }
+    .doc-card img {
+      max-width: 100%;
+      margin-top: 10px;
+      border: 1px solid #ccc;
+    }
+  </style>
+</head>
+<body>
+  <h1>Hello, {{ username }}! 👋 You are logged in.</h1>
+
+  <h2>📤 Upload a document</h2>
+  <form method="POST" action="{{ url_for('upload') }}" enctype="multipart/form-data">
+    <input type="file" name="file" required><br><br>
+
+    <label>Certified?</label>
+    <input type="checkbox" name="certified"><br><br>
+
+    <label>Certification Date:</label>
+    <input type="date" name="cert_date"><br><br>
+
+    <button type="submit">Upload</button>
+  </form>
+
+  <h2>📁 Your Documents</h2>
+
+  {% if documents %}
+    {% for doc in documents %}
+      <div class="doc-card">
+        <h3>{{ doc.doc_type or "Document" }}</h3>
+        <p><strong>Filename:</strong> {{ doc.filename }}</p>
+        <p><strong>Certified:</strong> {{ 'Yes' if doc.certified else 'No' }}</p>
+        <p><strong>Certification Date:</strong> {{ doc.cert_date or 'N/A' }}</p>
+        <p><strong>Expiry Date:</strong> {{ doc.expiry_date or 'N/A' }}</p>
+
+        {% if doc.filename.lower().endswith(('.png', '.jpg', '.jpeg', '.gif')) %}
+          <img src="{{ url_for('static', filename='uploads/' + doc.filename) }}" alt="{{ doc.filename }}">
+        {% else %}
+          <a href="{{ url_for('static', filename='uploads/' + doc.filename) }}" target="_blank">📄 View Document</a>
+        {% endif %}
+      </div>
+    {% endfor %}
+  {% else %}
+    <p>No documents uploaded yet.</p>
+  {% endif %}
+
+  <br><a href="{{ url_for('logout') }}">🚪 Logout</a>
+</body>
+</html>

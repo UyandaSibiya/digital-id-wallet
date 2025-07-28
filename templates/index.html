@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Welcome - Digital ID Wallet</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      max-width: 480px;
+      margin: 40px auto;
+      padding: 0 20px;
+    }
+    h1 {
+      text-align: center;
+    }
+    .button {
+      display: block;
+      width: 100%;
+      padding: 12px;
+      margin: 10px 0;
+      font-size: 16px;
+      text-align: center;
+      cursor: pointer;
+      border: none;
+      border-radius: 4px;
+      text-decoration: none;
+      color: white;
+    }
+    .login-btn {
+      background-color: #007bff;
+    }
+    .register-btn {
+      background-color: #28a745;
+    }
+  </style>
+</head>
+<body>
+  <h1>Welcome to Digital ID Wallet</h1>
+
+  <a href="{{ url_for('login') }}" class="button login-btn">Login with Email</a>
+  <a href="{{ url_for('register') }}" class="button register-btn">Register with Email</a>
+</body>
+</html>
