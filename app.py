@@ -632,7 +632,7 @@ def get_user_stats():
         "certified_documents": certified_docs,
         "time_saved_hours": time_saved_hours,
         "money_saved_rand": money_saved,
-        "success_rate": "99.8%",
+        "Progress_rate": "99.8%",
         "avg_processing_time": "30 seconds",
         "member_since": current_user.created_at.strftime("%B %Y"),
         "last_login": current_user.last_login.strftime("%Y-%m-%d %H:%M") if current_user.last_login else "First time",
