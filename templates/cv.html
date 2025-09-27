@@ -1,6 +1,0 @@
-<h2>Your Uploaded CVs</h2>
-<ul>
-  {% for doc in documents %}
-    <li><a href="{{ url_for('uploaded_file', filename=doc.filename) }}">{{ doc.filename }}</a> ({{ doc.cert_date or "No cert date" }})</li>
-  {% endfor %}
-</ul>
