@@ -3,42 +3,132 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Welcome - Digital ID Wallet</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      max-width: 480px;
-      margin: 40px auto;
-      padding: 0 20px;
-    }
-    h1 {
-      text-align: center;
-    }
-    .button {
-      display: block;
-      width: 100%;
-      padding: 12px;
-      margin: 10px 0;
-      font-size: 16px;
-      text-align: center;
-      cursor: pointer;
-      border: none;
-      border-radius: 4px;
-      text-decoration: none;
-      color: white;
-    }
-    .login-btn {
-      background-color: #007bff;
-    }
-    .register-btn {
-      background-color: #28a745;
-    }
-  </style>
+  <title>Digital Wallet - Secure Login & Register</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
 </head>
-<body>
-  <h1>Welcome to Digital ID Wallet</h1>
 
-  <a href="{{ url_for('login') }}" class="button login-btn">Login with Email</a>
-  <a href="{{ url_for('register') }}" class="button register-btn">Register with Email</a>
+<body class="bg-gray-900 text-white font-inter">
+
+<main class="flex flex-col md:flex-row justify-center items-start md:items-center min-h-screen p-4 gap-8">
+
+  <!-- Authentication Forms -->
+  <section class="w-full md:w-1/2 max-w-md" aria-label="Authentication forms">
+    <h2 id="form-title" class="text-2xl font-semibold mb-6">Access Your Digital Wallet</h2>
+
+    <!-- Login Form -->
+    <form id="login-form" method="POST" action="{{ url_for('login') }}" autocomplete="on" class="space-y-4 bg-gray-800 p-6 rounded-lg shadow-md">
+      <input type="email" name="email" class="w-full p-2 rounded text-black" placeholder="Email" required />
+      <input type="text" name="id_number" class="w-full p-2 rounded text-black" placeholder="ID Number" required />
+      <input type="text" name="phone_number" class="w-full p-2 rounded text-black" placeholder="Phone Number" required />
+      <input type="password" name="password" class="w-full p-2 rounded text-black" placeholder="Password" required />
+      <button type="submit" class="w-full bg-blue-500 hover:bg-blue-600 p-2 rounded">Login</button>
+      <p class="text-sm mt-3">
+        Need an account?
+        <span class="toggle-link text-blue-400 cursor-pointer" id="show-register">Register</span>
+      </p>
+      {% with messages = get_flashed_messages() %}
+        {% if messages %}
+          <ul class="mt-4 text-yellow-300">
+          {% for message in messages %}
+            <li>{{ message }}</li>
+          {% endfor %}
+          </ul>
+        {% endif %}
+      {% endwith %}
+    </form>
+
+    <!-- Register Form -->
+    <form id="register-form" method="POST" action="{{ url_for('register') }}" 
+          autocomplete="on" enctype="multipart/form-data"
+          class="space-y-4 bg-gray-800 p-6 rounded-lg shadow-md" style="display: none;">
+      
+      <input type="email" name="email" class="w-full p-2 rounded text-black" placeholder="Email" required />
+      <input type="text" name="username" class="w-full p-2 rounded text-black" placeholder="Username" required />
+      <input type="text" name="id_number" class="w-full p-2 rounded text-black" placeholder="ID Number" required />
+      <input type="text" name="phone_number" class="w-full p-2 rounded text-black" placeholder="Phone Number" required />
+      <input type="password" name="password" class="w-full p-2 rounded text-black" placeholder="Password" required />
+      <input type="password" name="confirm_password" class="w-full p-2 rounded text-black" placeholder="Confirm Password" required />
+
+      <!-- Webcam capture -->
+      <div class="mt-4 text-center">
+        <h3 class="text-lg font-semibold mb-2">Capture Your Face</h3>
+        <video id="regVideo" width="280" height="200" autoplay class="mx-auto rounded border"></video>
+        <canvas id="regCanvas" style="display:none;"></canvas>
+        <input type="file" name="face_image" id="regFaceInput" style="display:none;" required />
+        <button type="button" id="captureFaceBtn" 
+                class="mt-2 bg-purple-500 hover:bg-purple-600 px-4 py-2 rounded">
+          Capture Face
+        </button>
+      </div>
+
+      <button type="submit" class="w-full bg-green-500 hover:bg-green-600 p-2 rounded">Register</button>
+      <p class="text-sm mt-3">
+        Already have an account?
+        <span class="toggle-link text-blue-400 cursor-pointer" id="show-login">Login</span>
+      </p>
+
+      {% with messages = get_flashed_messages() %}
+        {% if messages %}
+          <ul class="mt-4 text-yellow-300">
+          {% for message in messages %}
+            <li>{{ message }}</li>
+          {% endfor %}
+          </ul>
+        {% endif %}
+      {% endwith %}
+    </form>
+
+    <!-- Face Login Section -->
+    <div class="face-login-section mt-6 bg-gray-800 p-4 rounded-lg shadow-md text-center">
+      <h3 class="text-xl font-semibold mb-4">Face Login</h3>
+      <video id="video" width="280" height="200" autoplay class="mx-auto rounded"></video>
+      <canvas id="canvas" style="display:none;"></canvas>
+      <button id="faceLoginBtn" class="mt-4 bg-purple-500 hover:bg-purple-600 px-4 py-2 rounded">
+        Login with Face
+      </button>
+      <form id="faceForm" action="{{ url_for('face_login') }}" method="POST" enctype="multipart/form-data" style="display:none;">
+        <input type="file" name="face_image" id="faceInput">
+      </form>
+    </div>
+
+  </section>
+</main>
+
+<!-- Scripts at the bottom -->
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const regVideo = document.getElementById("regVideo");
+  const regCanvas = document.getElementById("regCanvas");
+  const regFaceInput = document.getElementById("regFaceInput");
+  const captureBtn = document.getElementById("captureFaceBtn");
+
+  // Start webcam
+  navigator.mediaDevices.getUserMedia({ video: true })
+    .then(stream => {
+      regVideo.srcObject = stream;
+    })
+    .catch(err => console.error("Camera error:", err));
+
+  // Capture face when button is clicked
+  captureBtn.addEventListener("click", () => {
+    const context = regCanvas.getContext("2d");
+    regCanvas.width = regVideo.videoWidth;
+    regCanvas.height = regVideo.videoHeight;
+    context.drawImage(regVideo, 0, 0, regCanvas.width, regCanvas.height);
+
+    regCanvas.toBlob(blob => {
+      const file = new File([blob], "face.png", { type: "image/png" });
+      const dataTransfer = new DataTransfer();
+      dataTransfer.items.add(file);
+      regFaceInput.files = dataTransfer.files;
+      alert("✅ Face captured! You can now complete registration.");
+    }, "image/png");
+  });
+});
+</script>
+
+<script src="{{ url_for('static', filename='js/index.js') }}"></script>
 </body>
 </html>

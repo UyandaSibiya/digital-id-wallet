@@ -1,0 +1,81 @@
+2025-09-26 22:06:01,192 INFO app: Database tables created successfully
+2025-09-26 22:06:01,193 WARNING app: Using development secret key! Change this in production!
+2025-09-26 22:06:01,330 INFO werkzeug: [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:8080
+2025-09-26 22:06:01,330 INFO werkzeug: [33mPress CTRL+C to quit[0m
+2025-09-26 22:06:01,332 INFO werkzeug:  * Restarting with stat
+2025-09-26 22:06:02,600 INFO app: Database tables created successfully
+2025-09-26 22:06:02,600 WARNING app: Using development secret key! Change this in production!
+2025-09-26 22:06:02,608 WARNING werkzeug:  * Debugger is active!
+2025-09-26 22:06:02,827 INFO werkzeug:  * Debugger PIN: 115-215-428
+2025-09-26 22:06:15,091 INFO werkzeug: 127.0.0.1 - - [26/Sep/2025 22:06:15] "GET / HTTP/1.1" 200 -
+2025-09-26 22:06:15,467 INFO werkzeug: 127.0.0.1 - - [26/Sep/2025 22:06:15] "GET /static/js/index.js HTTP/1.1" 200 -
+2025-09-26 22:06:15,480 INFO werkzeug: 127.0.0.1 - - [26/Sep/2025 22:06:15] "GET /static/css/style.css HTTP/1.1" 200 -
+2025-09-26 22:06:15,488 WARNING app: 404 error: http://127.0.0.1:8080/static/css/{{%20url_for("static",%20filename="img/img.jpg")%20}}
+2025-09-26 22:06:15,700 INFO werkzeug: 127.0.0.1 - - [26/Sep/2025 22:06:15] "[36mGET /static/img/img.jpg HTTP/1.1[0m" 304 -
+2025-09-26 22:06:16,046 WARNING app: 404 error: http://127.0.0.1:8080/favicon.ico
+2025-09-26 22:06:16,126 INFO werkzeug: 127.0.0.1 - - [26/Sep/2025 22:06:16] "[35m[1mGET /static/css/{{%20url_for("static",%20filename="img/img.jpg")%20}} HTTP/1.1[0m" 500 -
+2025-09-26 22:06:16,128 INFO werkzeug: 127.0.0.1 - - [26/Sep/2025 22:06:16] "[35m[1mGET /favicon.ico HTTP/1.1[0m" 500 -
+2025-09-26 23:10:08,214 INFO app: Database tables created successfully
+2025-09-26 23:10:08,214 WARNING app: Using development secret key! Change this in production!
+2025-09-26 23:11:06,620 INFO app: Database tables created successfully
+2025-09-26 23:11:06,620 WARNING app: Using development secret key! Change this in production!
+2025-09-26 23:11:06,768 INFO werkzeug: [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:8080
+2025-09-26 23:11:06,769 INFO werkzeug: [33mPress CTRL+C to quit[0m
+2025-09-26 23:11:06,791 INFO werkzeug:  * Restarting with stat
+2025-09-26 23:11:08,036 INFO app: Database tables created successfully
+2025-09-26 23:11:08,036 WARNING app: Using development secret key! Change this in production!
+2025-09-26 23:11:08,044 WARNING werkzeug:  * Debugger is active!
+2025-09-26 23:11:08,044 INFO werkzeug:  * Debugger PIN: 115-215-428
+2025-09-26 23:11:13,124 INFO werkzeug: 127.0.0.1 - - [26/Sep/2025 23:11:13] "GET / HTTP/1.1" 200 -
+2025-09-26 23:11:13,298 INFO werkzeug: 127.0.0.1 - - [26/Sep/2025 23:11:13] "GET /static/css/style.css HTTP/1.1" 200 -
+2025-09-26 23:11:13,340 INFO werkzeug: 127.0.0.1 - - [26/Sep/2025 23:11:13] "GET /static/js/index.js HTTP/1.1" 200 -
+2025-09-26 23:11:13,379 WARNING app: 404 error: http://127.0.0.1:8080/static/css/{{%20url_for("static",%20filename="img/img.jpg")%20}}
+2025-09-26 23:11:13,437 INFO werkzeug: 127.0.0.1 - - [26/Sep/2025 23:11:13] "[36mGET /static/img/img.jpg HTTP/1.1[0m" 304 -
+2025-09-26 23:11:13,538 INFO werkzeug: 127.0.0.1 - - [26/Sep/2025 23:11:13] "[35m[1mGET /static/css/{{%20url_for("static",%20filename="img/img.jpg")%20}} HTTP/1.1[0m" 500 -
+2025-09-26 23:11:13,598 WARNING app: 404 error: http://127.0.0.1:8080/favicon.ico
+2025-09-26 23:11:13,640 INFO werkzeug: 127.0.0.1 - - [26/Sep/2025 23:11:13] "[35m[1mGET /favicon.ico HTTP/1.1[0m" 500 -
+2025-09-26 23:11:37,618 INFO app: DEBUG: Face login attempt
+2025-09-26 23:11:37,707 INFO app: DEBUG: Saved temporary face image: static/uploads/temp_1758921097.618419.png
+2025-09-26 23:11:38,849 ERROR app: Face login error: (sqlite3.OperationalError) no such column: user.created_at
+[SQL: SELECT user.id AS user_id, user.email AS user_email, user.username AS user_username, user.password AS user_password, user.id_number AS user_id_number, user.phone_number AS user_phone_number, user.face_image AS user_face_image, user.created_at AS user_created_at, user.last_login AS user_last_login 
+FROM user 
+WHERE user.face_image IS NOT NULL]
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+2025-09-26 23:11:38,850 INFO werkzeug: 127.0.0.1 - - [26/Sep/2025 23:11:38] "[32mPOST /face_login HTTP/1.1[0m" 302 -
+2025-09-26 23:11:38,853 INFO werkzeug: 127.0.0.1 - - [26/Sep/2025 23:11:38] "GET / HTTP/1.1" 200 -
+2025-09-26 23:11:38,886 INFO werkzeug: 127.0.0.1 - - [26/Sep/2025 23:11:38] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2025-09-26 23:11:38,888 INFO werkzeug: 127.0.0.1 - - [26/Sep/2025 23:11:38] "[36mGET /static/js/index.js HTTP/1.1[0m" 304 -
+2025-09-26 23:11:38,908 WARNING app: 404 error: http://127.0.0.1:8080/static/css/{{%20url_for("static",%20filename="img/img.jpg")%20}}
+2025-09-26 23:11:38,909 INFO werkzeug: 127.0.0.1 - - [26/Sep/2025 23:11:38] "[36mGET /static/img/img.jpg HTTP/1.1[0m" 304 -
+2025-09-26 23:11:38,917 INFO werkzeug: 127.0.0.1 - - [26/Sep/2025 23:11:38] "[35m[1mGET /static/css/{{%20url_for("static",%20filename="img/img.jpg")%20}} HTTP/1.1[0m" 500 -
+2025-09-26 23:11:52,612 INFO app: DEBUG: Face login attempt
+2025-09-26 23:11:52,701 INFO app: DEBUG: Saved temporary face image: static/uploads/temp_1758921112.612525.png
+2025-09-26 23:11:53,001 ERROR app: Face login error: (sqlite3.OperationalError) no such column: user.created_at
+[SQL: SELECT user.id AS user_id, user.email AS user_email, user.username AS user_username, user.password AS user_password, user.id_number AS user_id_number, user.phone_number AS user_phone_number, user.face_image AS user_face_image, user.created_at AS user_created_at, user.last_login AS user_last_login 
+FROM user 
+WHERE user.face_image IS NOT NULL]
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+2025-09-26 23:11:53,003 INFO werkzeug: 127.0.0.1 - - [26/Sep/2025 23:11:53] "[32mPOST /face_login HTTP/1.1[0m" 302 -
+2025-09-26 23:11:53,008 INFO werkzeug: 127.0.0.1 - - [26/Sep/2025 23:11:53] "GET / HTTP/1.1" 200 -
+2025-09-26 23:11:53,110 INFO werkzeug: 127.0.0.1 - - [26/Sep/2025 23:11:53] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2025-09-26 23:11:53,112 INFO werkzeug: 127.0.0.1 - - [26/Sep/2025 23:11:53] "[36mGET /static/js/index.js HTTP/1.1[0m" 304 -
+2025-09-26 23:11:53,125 INFO werkzeug: 127.0.0.1 - - [26/Sep/2025 23:11:53] "[36mGET /static/img/img.jpg HTTP/1.1[0m" 304 -
+2025-09-26 23:11:53,126 WARNING app: 404 error: http://127.0.0.1:8080/static/css/{{%20url_for("static",%20filename="img/img.jpg")%20}}
+2025-09-26 23:11:53,133 INFO werkzeug: 127.0.0.1 - - [26/Sep/2025 23:11:53] "[35m[1mGET /static/css/{{%20url_for("static",%20filename="img/img.jpg")%20}} HTTP/1.1[0m" 500 -
+2025-09-26 23:14:14,105 INFO app: DEBUG: Login attempt for email: Yanda@12
+2025-09-26 23:14:14,109 ERROR app: Login error: (sqlite3.OperationalError) no such column: user.created_at
+[SQL: SELECT user.id AS user_id, user.email AS user_email, user.username AS user_username, user.password AS user_password, user.id_number AS user_id_number, user.phone_number AS user_phone_number, user.face_image AS user_face_image, user.created_at AS user_created_at, user.last_login AS user_last_login 
+FROM user 
+WHERE user.email = ? AND user.id_number = ? AND user.phone_number = ?
+ LIMIT ? OFFSET ?]
+[parameters: ('Yanda@12', '1234567891011', '0829252136', 1, 0)]
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+2025-09-26 23:14:14,110 INFO werkzeug: 127.0.0.1 - - [26/Sep/2025 23:14:14] "[32mPOST /login HTTP/1.1[0m" 302 -
+2025-09-26 23:14:14,119 INFO werkzeug: 127.0.0.1 - - [26/Sep/2025 23:14:14] "GET / HTTP/1.1" 200 -
+2025-09-26 23:14:14,170 INFO werkzeug: 127.0.0.1 - - [26/Sep/2025 23:14:14] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2025-09-26 23:14:14,171 INFO werkzeug: 127.0.0.1 - - [26/Sep/2025 23:14:14] "[36mGET /static/js/index.js HTTP/1.1[0m" 304 -
+2025-09-26 23:14:14,190 WARNING app: 404 error: http://127.0.0.1:8080/static/css/{{%20url_for("static",%20filename="img/img.jpg")%20}}
+2025-09-26 23:14:14,191 INFO werkzeug: 127.0.0.1 - - [26/Sep/2025 23:14:14] "[36mGET /static/img/img.jpg HTTP/1.1[0m" 304 -
+2025-09-26 23:14:14,199 INFO werkzeug: 127.0.0.1 - - [26/Sep/2025 23:14:14] "[35m[1mGET /static/css/{{%20url_for("static",%20filename="img/img.jpg")%20}} HTTP/1.1[0m" 500 -

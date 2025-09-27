@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Dashboard - Digital Wallet</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 40px;
+      background-color: #0d1b2a; /* Dark navy blue */
+      color: #e0e0e0;
+    }
+
+    h1, h2 {
+      color: #a8dadc; /* Soft blue accent */
+    }
+
+    .doc-card {
+      border: 1px solid #1b263b;
+      padding: 15px;
+      margin-bottom: 20px;
+      border-radius: 10px;
+      background: #1b263b; /* Darker card background */
+      max-width: 600px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.5);
+    }
+
+    .doc-card img {
+      max-width: 100%;
+      margin-top: 10px;
+      border: 1px solid #415a77;
+      border-radius: 5px;
+    }
+
+    form {
+      margin-bottom: 40px;
+      background: #1b263b; /* Dark form background */
+      padding: 20px;
+      border-radius: 10px;
+      max-width: 600px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.5);
+    }
+
+    input[type="file"], input[type="date"], input[type="text"], input[type="email"], input[type="password"] {
+      padding: 10px;
+      margin-bottom: 15px;
+      width: 100%;
+      box-sizing: border-box;
+      border-radius: 5px;
+      border: 1px solid #415a77;
+      background-color: #0d1b2a;
+      color: #e0e0e0;
+    }
+
+    button {
+      padding: 10px 15px;
+      background-color: #1b4965;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    button:hover {
+      background-color: #3282b8;
+    }
+
+    a.logout {
+      display: inline-block;
+      margin-top: 20px;
+      color: #f94144;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    a.logout:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Hello, {{ current_user.username }}! 👋 You are logged in.</h1>
+
+  <h2>📤 Upload a Document</h2>
+  <form method="POST" action="{{ url_for('upload') }}" enctype="multipart/form-data">
+    <input type="file" name="file" required><br>
+
+    <label>
+      Certified?
+      <input type="checkbox" name="certified">
+    </label><br><br>
+
+    <label>Certification Date:</label>
+    <input type="date" name="cert_date"><br><br>
+
+    <button type="submit">Upload</button>
+  </form>
+
+  <h2>📁 Your Documents</h2>
+  {% if documents %}
+    {% for doc in documents %}
+      <div class="doc-card">
+        <h3>{{ doc.doc_type or "Document" }}</h3>
+        <p><strong>Filename:</strong> {{ doc.filename }}</p>
+        <p><strong>Certified:</strong> {{ 'Yes' if doc.certified else 'No' }}</p>
+        <p><strong>Certification Date:</strong> {{ doc.cert_date or 'N/A' }}</p>
+        <p><strong>Expiry Date:</strong> {{ doc.expiry_date or 'N/A' }}</p>
+
+        {% if doc.filename.lower().endswith(('.png', '.jpg', '.jpeg', '.gif')) %}
+          <img src="{{ url_for('static', filename='uploads/' + doc.filename) }}" alt="{{ doc.filename }}">
+        {% else %}
+          <a href="{{ url_for('static', filename='uploads/' + doc.filename) }}" target="_blank">📄 View Document</a>
+        {% endif %}
+      </div>
+    {% endfor %}
+  {% else %}
+    <p>No documents uploaded yet.</p>
+  {% endif %}
+
+  <a href="{{ url_for('logout') }}" class="logout">🚪 Logout</a>
+
+</body>
+</html>
